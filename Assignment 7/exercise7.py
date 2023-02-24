@@ -63,9 +63,16 @@ class TeacherCourse:
     def display_all_courses_taught_by_a_teacher(self, teacher_id):
         self.get_teacherCourseList_as_dict()
 
+        existedTeacherID = []
         for key in self.TeacherCourseList:
-            if(teacher_id == self.TeacherCourseList[key]["Teacher_id"]):
-                print(self.CourseList[self.TeacherCourseList[key]["Course_id"]]["CourseName"])
+            existedTeacherID.append(self.TeacherCourseList[key]["Teacher_id"])
+
+        if(teacher_id not in existedTeacherID):
+            print("The teacher ID doesn't exist")
+        else:
+            for key in self.TeacherCourseList:
+                if(teacher_id == self.TeacherCourseList[key]["Teacher_id"]):
+                    print(self.CourseList[self.TeacherCourseList[key]["Course_id"]]["CourseName"])
 
 teacherCourseList1 = TeacherCourse()
 while(1):
