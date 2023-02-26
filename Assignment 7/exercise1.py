@@ -1,3 +1,4 @@
+#function to display the menu
 def display_menu():
     print("a. Add a new faculty")
     print("b. Search a faculty by id")
@@ -17,11 +18,13 @@ class Faculty:
             self.FacultyID, self.FacultyName, self.DeanName, self.OfficeNo = item.split(", ")
             self.FacultyList[self.FacultyID] = {"FacultyName":self.FacultyName, "DeanName":self.DeanName, "OfficeNo":self.OfficeNo}
 
+    #function to update the new data to the file
     def update_data(self):
         with open("Faculty.txt","w") as file1:
             for key in self.FacultyList:
                 file1.write(key + ", " + self.FacultyList[key]["FacultyName"] + ", " + self.FacultyList[key]["DeanName"] + ", " + self.FacultyList[key]["OfficeNo"] + "\n")
 
+    #function to add a new faculty
     def add_faculty(self):
         self.FacultyID = input("Faculty ID: ")
         while(self.FacultyID in self.FacultyList.keys()):
@@ -34,6 +37,7 @@ class Faculty:
 
         self.update_data()
 
+    #function to search for a specific faculty by id   
     def search_a_faculty(self, id):
         if(id not in self.FacultyList.keys()):
             print("Search not found")
@@ -42,7 +46,8 @@ class Faculty:
                 if id == key:
                     print(key + " " + self.FacultyList[key]["FacultyName"] + " " + self.FacultyList[key]["DeanName"] + " " + self.FacultyList[key]["OfficeNo"])
                     break
-
+    
+    #function to update infomation about a faculty by id
     def update_a_faculty(self, id):
         if(id not in self.FacultyList.keys()):
             print("ID(to update) not found")
@@ -55,6 +60,7 @@ class Faculty:
 
             self.update_data()
 
+    #function to delete a faculty by id
     def delete_a_faculty(self, id):
         if(id not in self.FacultyList.keys()):
             print("ID(to delete) not found")
@@ -66,17 +72,20 @@ class Faculty:
 
             self.update_data()
 
-    def display_all_faculty(self):
+    #function to display all the faculties
+    def display_all_faculties(self):
         for key in self.FacultyList:
             print(key + " " + self.FacultyList[key]["FacultyName"] + " " + self.FacultyList[key]["DeanName"] + " " + self.FacultyList[key]["OfficeNo"])
 
 facultyList1 = Faculty()
 while(1):
+    #display the menu and get the user's input
     print("")
     display_menu()
     menu = input("Select menu: ").lower()
     print("")
 
+    #decision based on the user's input
     if(menu == "a"):
         facultyList1.add_faculty()
     elif(menu == "b"):
@@ -89,7 +98,7 @@ while(1):
         id = input("ID(to delete): ")
         facultyList1.delete_a_faculty(id)
     elif(menu == "e"):
-        facultyList1.display_all_faculty()
+        facultyList1.display_all_faculties()
     elif(menu == "f"):
         break
     else:

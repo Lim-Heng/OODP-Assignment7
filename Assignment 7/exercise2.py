@@ -1,3 +1,4 @@
+#function to display the menu
 def display_menu():
     print("a. Add a new department")
     print("b. Search a department by id")
@@ -18,11 +19,13 @@ class Department:
             self.DepartmentID, self.DepartmentName, self.HeadName, self.OfficeNo, self.FacultyID = item.split(", ")
             self.DepartmentList[self.DepartmentID] = {"DepartmentName":self.DepartmentName, "HeadName":self.HeadName, "OfficeNo":self.OfficeNo, "FacultyID":self.FacultyID}
 
+    #function to update the new data to the file
     def update_data(self):
         with open("Department.txt","w") as file1:
             for key in self.DepartmentList:
                 file1.write(key + ", " + self.DepartmentList[key]["DepartmentName"] + ", " + self.DepartmentList[key]["HeadName"] + ", " + self.DepartmentList[key]["OfficeNo"] + ", " + self.DepartmentList[key]["FacultyID"] + "\n")
 
+    #function to add department
     def add_department(self):
         self.DepartmentID = input("Department ID: ")
         while(self.FacultyID in self.DepartmentList.keys()):
@@ -36,6 +39,7 @@ class Department:
 
         self.update_data()
 
+    #function to search for a specific department by id
     def search_a_department(self, id):
         if(id not in self.DepartmentList.keys()):
             print("Search not found")
@@ -45,6 +49,7 @@ class Department:
                     print(key + " " + self.DepartmentList[key]["DepartmentName"] + " " + self.DepartmentList[key]["HeadName"] + " " + self.DepartmentList[key]["OfficeNo"] + " " + self.DepartmentList[key]["FacultyID"])
                     break
 
+    #function to update information about a department by id
     def update_a_department(self, id):
         if(id not in self.DepartmentList.keys()):
             print("ID(to update) not found")
@@ -57,6 +62,7 @@ class Department:
 
             self.update_data()
 
+    #function to delete a department by id
     def delete_a_department(self, id):
 
         if(id not in self.DepartmentList.keys()):
@@ -69,10 +75,12 @@ class Department:
 
             self.update_data()
 
+    #function to display all the departments
     def display_all_department(self):
         for key in self.DepartmentList:
             print(key + " " + self.DepartmentList[key]["DepartmentName"] + " " + self.DepartmentList[key]["HeadName"] + " " + self.DepartmentList[key]["OfficeNo"] + " " + self.DepartmentList[key]["FacultyID"])
 
+    #function to display all the departments that belongs a faculty
     def display_departments_by_a_faculty(self, fac_id):
         existedFacID = []
         for key in self.DepartmentList:
@@ -87,11 +95,13 @@ class Department:
 
 departmentList1 = Department()
 while(1):
+    #display the menu and get the user's input
     print("")
     display_menu()
     menu = input("Select menu: ").lower()
     print("")
 
+    #decision based on the user's input
     if(menu == "a"):
         departmentList1.add_department()
     elif(menu == "b"):
