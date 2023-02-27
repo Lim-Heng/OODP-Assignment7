@@ -1,6 +1,7 @@
 import runpy
 
 while(1):
+    #display the menu and get the user's input
     print("")
     print("1. Manage Faculties")
     print("2. Manage Departments")
@@ -15,6 +16,7 @@ while(1):
     menu = input("Select menu: ").lower()
     print("")
 
+    #decision based on the user's input
     if(menu == "1"):
         runpy.run_path("Assignment 7/exercise1.py")
     elif(menu == "2"):
