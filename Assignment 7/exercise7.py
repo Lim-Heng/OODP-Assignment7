@@ -1,3 +1,4 @@
+#function to display the menu
 def display_menu():
     print("a. Assign a course to a teacher")
     print("b. Remove a course from a teacher")
@@ -34,6 +35,7 @@ class TeacherCourse:
                 with open("TeacherCourse.txt","a") as file1:
                     file1.write(TeacherID + ", " + CourseID + "\n")
 
+    #function to get the teacherCourseList as dictionary
     def get_teacherCourseList_as_dict(self):
         with open("TeacherCourse.txt","r") as file1:
             data = file1.read().rstrip("\n")
@@ -45,9 +47,11 @@ class TeacherCourse:
             self.TeacherCourseList[idex] = {"Teacher_id":TeacherID, "Course_id":CourseID}
             idex = idex + 1
 
+    #function to remove a course from a teacher
     def remove_a_course_from_a_teacher(self):
         self.get_teacherCourseList_as_dict()
         CourseID = input("Course ID(to remove): ")
+
         if(CourseID not in self.CourseList):
             print("The course ID doesn't exist")
         else:
@@ -60,9 +64,9 @@ class TeacherCourse:
                         del self.TeacherCourseList[key]
                         break
 
+    #function to display all the courses taught by a teacher
     def display_all_courses_taught_by_a_teacher(self, teacher_id):
         self.get_teacherCourseList_as_dict()
-
         existedTeacherID = []
         for key in self.TeacherCourseList:
             existedTeacherID.append(self.TeacherCourseList[key]["Teacher_id"])
@@ -76,11 +80,13 @@ class TeacherCourse:
 
 teacherCourseList1 = TeacherCourse()
 while(1):
+    #function to display the menu and get user's input
     print("")
     display_menu()
     menu = input("Select menu: ")
     print("")
 
+    #decision based on user's input
     if(menu == "a"):
         teacherCourseList1.assign_course_to_teacher()
     elif(menu == "b"):

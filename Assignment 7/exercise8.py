@@ -1,3 +1,4 @@
+#function to display menu
 def display_menu():
     print("a. Create a teacher account")
     print("b. Create a student account")
