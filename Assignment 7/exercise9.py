@@ -25,7 +25,7 @@ class Login:
             self.StudentID, self.StudentName, self.Gender, self.DOB, self.PhoneNo, self.Address, self.Year, self.Generation, self.Degree = item.split(", ")
             self.StudentList[self.StudentID] = {"StudentName":self.StudentName, "Gender":self.Gender, "DOB":self.DOB, "PhoneNo":self.PhoneNo, "Address":self.Address, "Year":self.Year, "Generation":self.Generation, "Degree":self.Degree}
 
-
+    #function to get user's username and password then verify the input   
     def login_verification(self):
         login = False
 
@@ -49,5 +49,6 @@ class Login:
             else:
                 break
 
+#create an instance of Login class and call the login verfication method
 login1 = Login()
 login1.login_verification()
