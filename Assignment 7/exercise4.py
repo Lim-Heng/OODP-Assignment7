@@ -1,3 +1,4 @@
+#function to display the menu
 def display_menu():
     print("a. Enroll a student into a department")
     print("b. Remove a student from a department")
@@ -5,6 +6,7 @@ def display_menu():
     print("d. Exit program")
 
 class StudentDetail:
+    #function to read all the data about department and student into a dictionary
     def __init__(self):
         with open("Department.txt","r") as file1:
             data = file1.read().rstrip("\n")
@@ -22,6 +24,7 @@ class StudentDetail:
             self.StudentID, self.StudentName, self.Gender, self.DOB, self.PhoneNo, self.Address, self.Year, self.Generation, self.Degree = item.split(", ")
             self.StudentList[self.StudentID] = {"StudentName":self.StudentName, "Gender":self.Gender, "DOB":self.DOB, "PhoneNo":self.PhoneNo, "Address":self.Address, "Year":self.Year, "Generation":self.Generation, "Degree":self.Degree}
 
+    #function to enroll a student into a department and write to the file    
     def enroll_student_to_dept(self):
         StuID = input("Student ID: ")
         if(StuID not in self.StudentList.keys()):
@@ -34,6 +37,7 @@ class StudentDetail:
                 with open("StudentDetail.txt","a") as file1:
                     file1.write(DeptID + ", " + StuID + "\n")
 
+    #function to get the studentDetialList as a dictionary from the file
     def get_studentDetialList_as_dict(self):
         with open("StudentDetail.txt","r") as file1:
             data = file1.read().rstrip("\n")
@@ -42,14 +46,17 @@ class StudentDetail:
         self.StuIDList = []
         list1 = data.split("\n")
         idex = 0
+
         for item in list1:
             DeptID, StuID = item.split(", ")
             self.StudentDetailList[idex] = {"DeptID":DeptID, "StuID":StuID}
             idex = idex + 1
 
+    #function to remove a student from a department and write to the file
     def remove_a_student_from_department(self):
         self.get_studentDetialList_as_dict()
         StuID = input("Student ID(to remove): ")
+
         if(StuID not in self.StuIDList):
             print("The student ID doesn't exist")
         else:
@@ -62,6 +69,7 @@ class StudentDetail:
                         del self.StudentDetailList[key]
                         break
 
+    #function to display all the students in a specific department
     def display_all_students_at_a_department(self, dept_id):
         self.get_studentDetialList_as_dict()
 
@@ -71,11 +79,13 @@ class StudentDetail:
 
 studentDetailList1 = StudentDetail()
 while(1):
+    #display the menu and get the user's input
     print("")
     display_menu()
     menu = input("Select menu: ")
     print("")
 
+    #decision based on the user's input
     if(menu == "a"):
         studentDetailList1.enroll_student_to_dept()
     elif(menu == "b"):

@@ -1,4 +1,5 @@
 class Login:
+    #the init function to get all the data about account, teacher and student as a dictionary
     def __init__(self):
         with open("Account.txt","r") as file1:
             data = file1.read().rstrip("\n")
@@ -24,25 +25,29 @@ class Login:
             self.StudentID, self.StudentName, self.Gender, self.DOB, self.PhoneNo, self.Address, self.Year, self.Generation, self.Degree = item.split(", ")
             self.StudentList[self.StudentID] = {"StudentName":self.StudentName, "Gender":self.Gender, "DOB":self.DOB, "PhoneNo":self.PhoneNo, "Address":self.Address, "Year":self.Year, "Generation":self.Generation, "Degree":self.Degree}
 
-    def login_verification(self, userName, passWord):
+
+    def login_verification(self):
         login = False
 
-        for key in self.AccountList:
-            if(userName == self.AccountList[key]["UserName"] and passWord == self.AccountList[key]["PassWord"] and self.AccountList[key]["Role"] == "Teacher"):
-                print("Hi, " + self.AccountList[key]["Role"] + ": " + self.TeacherList[self.AccountList[key]["UserID"]]["TeacherName"])
-                login = True
-                break
-            elif(userName == self.AccountList[key]["UserName"] and passWord == self.AccountList[key]["PassWord"] and self.AccountList[key]["Role"] == "Student"):
-                print("Hi, " + self.AccountList[key]["Role"] + ": " + self.StudentList[self.AccountList[key]["UserID"]]["StudentName"])
-                login = True
-                break
+        while(1):
+            userName = input("UserName: ")
+            passWord = input("Password: ")
 
-        if(login == False):
-            print("Wrong username or password")
+            for key in self.AccountList:
+                if(userName == self.AccountList[key]["UserName"] and passWord == self.AccountList[key]["PassWord"] and self.AccountList[key]["Role"] == "Teacher"):
+                    print("Hi, " + self.AccountList[key]["Role"] + ": " + self.TeacherList[self.AccountList[key]["UserID"]]["TeacherName"])
+                    login = True
+                    break
+
+                elif(userName == self.AccountList[key]["UserName"] and passWord == self.AccountList[key]["PassWord"] and self.AccountList[key]["Role"] == "Student"):
+                    print("Hi, " + self.AccountList[key]["Role"] + ": " + self.StudentList[self.AccountList[key]["UserID"]]["StudentName"])
+                    login = True
+                    break
+
+            if(login == False):
+                print("Wrong username or password\n")
+            else:
+                break
 
 login1 = Login()
-
-userName = input("UserName: ")
-passWord = input("Password: ")
-
-login1.login_verification(userName, passWord)
+login1.login_verification()

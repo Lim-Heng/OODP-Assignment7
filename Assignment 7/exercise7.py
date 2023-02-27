@@ -6,6 +6,7 @@ def display_menu():
     print("d. Exit program")
 
 class TeacherCourse:
+    #function to get the data about course and teacher as a dictionary
     def __init__(self):
         with open("Course.txt","r") as file1:
             data = file1.read().rstrip("'\n")
@@ -23,6 +24,7 @@ class TeacherCourse:
             self.TeacherID, self.TeacherName, self.Gender, self.DOB, self.PhoneNo, self.Address = item.split(", ")
             self.TeacherList[self.TeacherID] = {"TeacherName":self.TeacherName, "Gender":self.Gender, "DOB":self.DOB, "PhoneNo":self.PhoneNo, "Address":self.Address}
 
+    #function to assign a course to a teacher
     def assign_course_to_teacher(self):
         CourseID = input("Course ID: ")
         if(CourseID not in self.CourseList.keys()):

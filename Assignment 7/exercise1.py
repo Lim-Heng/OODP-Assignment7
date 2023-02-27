@@ -8,6 +8,7 @@ def display_menu():
     print("f. Exit program")
 
 class Faculty:
+    #the init function to read all the data about faculty from the file into a dictionary
     def __init__(self):
         with open("Faculty.txt","r") as file1:
             data = file1.read().rstrip("\n")

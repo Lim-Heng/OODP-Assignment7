@@ -5,6 +5,7 @@ def display_menu():
     print("c. Exit program")
 
 class Create_Account:
+    #the init function to get all the teacher data as a dictionary
     def __init__(self):
         with open("Teacher.txt","r") as file1:
             data = file1.read().rstrip("\n")
@@ -22,6 +23,7 @@ class Create_Account:
             self.StudentID, self.StudentName, self.Gender, self.DOB, self.PhoneNo, self.Address, self.Year, self.Generation, self.Degree = item.split(", ")
             self.StudentList[self.StudentID] = {"StudentName":self.StudentName, "Gender":self.Gender, "DOB":self.DOB, "PhoneNo":self.PhoneNo, "Address":self.Address, "Year":self.Year, "Generation":self.Generation, "Degree":self.Degree}
 
+    #function to get the accounts as a dictionary
     def get_accounts_as_dict(self):
         with open("Account.txt","r") as file1:
             data = file1.read().rstrip("\n")
@@ -31,6 +33,7 @@ class Create_Account:
             self.AccountID, self.UserName, self.Password, self.PhoneNo, self.Role, self.UserID = item.split("\n")
             self.AccountList[self.AccountID] = {"UserName":self.UserName, "Password":self.Password, "PhoneNo":self.PhoneNo, "Role":self.Role, "UserID":self.UserID}
 
+    #function to create a teacher account
     def create_a_teacher_account(self):
         self.get_accounts_as_dict()
 
@@ -50,6 +53,7 @@ class Create_Account:
             with open("Account.txt","a") as file1:
                 file1.write(self.AccountID + ", " + self.UserName + ", " + self.Password + ", " + self.PhoneNo + ", " + self.Role + ", " + self.UserID + "\n")
 
+    #function to create a student account
     def create_a_student_account(self):
         self.AccountID = input("Account ID: ")
         self.UserName = input("Username: ")
@@ -66,11 +70,13 @@ class Create_Account:
 
 accountList1 = Create_Account()
 while(1):
+    #display the menu and get the user's input
     print("")
     display_menu()
     menu = input("Select menu: ")
     print("")
 
+    #decision based on the user's input
     if(menu == "a"):
         accountList1.create_a_teacher_account()
     elif(menu == "b"):

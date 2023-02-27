@@ -9,6 +9,7 @@ def display_menu():
     print("g. Exit program")
 
 class Department:
+    #the init function to read all the data about department into a file
     def __init__(self):
         with open("Department.txt","r") as file1:
             data = file1.read().rstrip("\n")

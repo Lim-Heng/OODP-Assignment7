@@ -1,3 +1,4 @@
+#function to display the menu
 def display_menu():
     print("a. Add a new teacher")
     print("b. Search a teacher by id")
@@ -7,6 +8,7 @@ def display_menu():
     print("f. Exit program")
 
 class Teacher:
+    #the init function to get all the data about teacher into a dictionary
     def __init__(self):
         with open("Teacher.txt","r") as file1:
             data = file1.read().rstrip("\n")
@@ -17,11 +19,13 @@ class Teacher:
             self.TeacherID, self.TeacherName, self.Gender, self.DOB, self.PhoneNo, self.Address = item.split(", ")
             self.TeacherList[self.TeacherID] = {"TeacherName":self.TeacherName, "Gender":self.Gender, "DOB":self.DOB, "PhoneNo":self.PhoneNo, "Address":self.Address}
     
+    #function to update the new data to the dictionary
     def update_data(self):
         with open("Teacher.txt","w") as file1:
             for key in self.TeacherList:
                 file1.write(key + ", " + self.TeacherList[key]["TeacherName"] + ", " + self.TeacherList[key]["Gender"] + ", " + self.TeacherList[key]["DOB"] + ", " + self.TeacherList[key]["PhoneNo"] + ", " + self.TeacherList[key]["Address"] + "\n") 
 
+    #function to add a new teacher
     def add_teacher(self):
         self.TeacherID = input("Teacher ID: ")
         while(self.TeacherID in self.TeacherList.keys()):
@@ -35,6 +39,7 @@ class Teacher:
 
         self.update_data()
 
+    #function to search a specific teacher
     def search_teacher(self, id):
         if(id not in self.TeacherList.keys()):
             print("Search not found")
@@ -44,6 +49,7 @@ class Teacher:
                     print(key + " " + self.TeacherList[key]["TeacherName"] + " " + self.TeacherList[key]["Gender"] + " " + self.TeacherList[key]["DOB"] + " " + self.TeacherList[key]["PhoneNo"] + " " + self.TeacherList[key]["Address"])
                     break
 
+    #function to update the new data to the file
     def update_a_teacher(self, id):
         if(id not in self.TeacherList.keys()):
             print("ID(to update) not found")
@@ -57,6 +63,7 @@ class Teacher:
 
             self.update_data()
 
+    #function to delete a specific teacher
     def delete_a_teacher(self, id):
         if(id not in self.TeacherList.keys()):
             print("ID(to delete) not found")
@@ -68,17 +75,20 @@ class Teacher:
 
             self.update_data()
 
+    #function to display all the teachers
     def display_all_teacher(self):
         for key in self.TeacherList:
             print(key + " " + self.TeacherList[key]["TeacherName"]  + " " + self.TeacherList[key]["Gender"] + " " + self.TeacherList[key]["DOB"] + " " + self.TeacherList[key]["PhoneNo"] + " " + self.TeacherList[key]["Address"])
 
 teacherList1 = Teacher()
 while(1):
+    #diplay the menu and get the user's input
     print("")
     display_menu()
     menu = input("Select menu: ").lower()
     print("")
 
+    #decision based the user's input
     if(menu == "a"):
         teacherList1.add_teacher()
     elif(menu == "b"):

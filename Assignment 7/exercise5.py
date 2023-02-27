@@ -1,3 +1,4 @@
+#function to display the menu
 def display_menu():
     print("a. Add a new course")
     print("b. Search a course by id")
@@ -7,6 +8,7 @@ def display_menu():
     print("f. Exit program")
 
 class Course:
+    #the init function to get all the data about course as a dictionary
     def __init__(self):
         with open("Course.txt","r") as file1:
             data = file1.read().rstrip("'\n")
@@ -17,6 +19,7 @@ class Course:
             self.CourseID, self.CourseName, self.Credit, self.Type, self.DeptID = item.split(", ")
             self.CourseList[self.CourseID] = {"CourseName":self.CourseName, "Credit":self.Credit, "Type":self.Type, "DeptID":self.DeptID}
 
+    #function to update the new data to the file
     def update_data(self):
         with open("Course.txt","w") as file1:
             for key in self.CourseList:
