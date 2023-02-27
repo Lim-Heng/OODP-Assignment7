@@ -56,6 +56,9 @@ class Create_Account:
     #function to create a student account
     def create_a_student_account(self):
         self.AccountID = input("Account ID: ")
+        while(self.AccountID in self.AccountList.keys()):
+            print("The account ID is already existed")
+            self.AccountID = input("Account ID: ")
         self.UserName = input("Username: ")
         self.Password = input("Password: ")
         self.Role = "Student"
