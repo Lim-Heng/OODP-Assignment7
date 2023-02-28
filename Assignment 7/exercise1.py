@@ -37,6 +37,7 @@ class Faculty:
         self.FacultyList[self.FacultyID] = {"FacultyName":self.FacultyName, "DeanName":self.DeanName, "OfficeNo":self.OfficeNo}
 
         self.update_data()
+        print("The faculty has been added")
 
     #function to search for a specific faculty by id   
     def search_a_faculty(self, id):
@@ -60,6 +61,7 @@ class Faculty:
             self.FacultyList[id] = {"FacultyName":self.FacultyName, "DeanName":self.DeanName, "OfficeNo":self.OfficeNo}
 
             self.update_data()
+            print("The faculty has been updated")
 
     #function to delete a faculty by id
     def delete_a_faculty(self, id):
@@ -72,6 +74,7 @@ class Faculty:
                     break
 
             self.update_data()
+            print("The faculty has been deleted")
 
     #function to display all the faculties
     def display_all_faculties(self):
