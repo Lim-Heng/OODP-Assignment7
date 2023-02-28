@@ -36,6 +36,7 @@ class TeacherCourse:
             else:
                 with open("TeacherCourse.txt","a") as file1:
                     file1.write(TeacherID + ", " + CourseID + "\n")
+                print("The course has been assigned to the teacher")
 
     #function to get the teacherCourseList as dictionary
     def get_teacherCourseList_as_dict(self):
@@ -65,6 +66,7 @@ class TeacherCourse:
                     if(TeacherID == self.TeacherCourseList[key]["Teacher_id"] and CourseID == self.TeacherCourseList[key]["Course_id"]):
                         del self.TeacherCourseList[key]
                         break
+                print("The course has been removed from the teacher")
 
     #function to display all the courses taught by a teacher
     def display_all_courses_taught_by_a_teacher(self, teacher_id):
@@ -76,10 +78,14 @@ class TeacherCourse:
         if(teacher_id not in existedTeacherID):
             print("The teacher ID doesn't exist")
         else:
+            print("---------------------------------------")
+            print("Teacher ID          Course Name")
+            print("---------------------------------------")
             for key in self.TeacherCourseList:
                 if(teacher_id == self.TeacherCourseList[key]["Teacher_id"]):
-                    print(self.CourseList[self.TeacherCourseList[key]["Course_id"]]["CourseName"])
-
+                    print(teacher_id + "                    " + self.CourseList[self.TeacherCourseList[key]["Course_id"]]["CourseName"])
+            print("---------------------------------------")
+                    
 teacherCourseList1 = TeacherCourse()
 while(1):
     #function to display the menu and get user's input

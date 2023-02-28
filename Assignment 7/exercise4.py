@@ -27,6 +27,7 @@ class StudentDetail:
     #function to enroll a student into a department and write to the file    
     def enroll_student_to_dept(self):
         StuID = input("Student ID: ")
+        
         if(StuID not in self.StudentList.keys()):
             print("The student ID doesn't exist")
         else:

@@ -30,7 +30,7 @@ class Create_Account:
         self.AccountList = {}
         list1 = data.split("\n")
         for item in list1:
-            self.AccountID, self.UserName, self.Password, self.PhoneNo, self.Role, self.UserID = item.split("\n")
+            self.AccountID, self.UserName, self.Password, self.PhoneNo, self.Role, self.UserID = item.split(", ")
             self.AccountList[self.AccountID] = {"UserName":self.UserName, "Password":self.Password, "PhoneNo":self.PhoneNo, "Role":self.Role, "UserID":self.UserID}
 
     #function to create a teacher account
@@ -45,13 +45,14 @@ class Create_Account:
         self.Password = input("Password: ")
         self.Role = "Teacher"
         self.UserID = input("User ID: ")
-
-        if(self.UserID not in self.TeacherList.keys()):
+        while(self.UserID not in self.TeacherList.keys()):
             print("The teacher ID doesn't exist")
-        else:
-            self.PhoneNo = self.TeacherList[self.UserID]["PhoneNo"]
-            with open("Account.txt","a") as file1:
-                file1.write(self.AccountID + ", " + self.UserName + ", " + self.Password + ", " + self.PhoneNo + ", " + self.Role + ", " + self.UserID + "\n")
+            self.UserID = input("User ID: ")
+        self.PhoneNo = self.TeacherList[self.UserID]["PhoneNo"]
+
+        with open("Account.txt","a") as file1:
+            file1.write(self.AccountID + ", " + self.UserName + ", " + self.Password + ", " + self.PhoneNo + ", " + self.Role + ", " + self.UserID + "\n")
+        print("The teacher account has been created")
 
     #function to create a student account
     def create_a_student_account(self):
@@ -63,13 +64,14 @@ class Create_Account:
         self.Password = input("Password: ")
         self.Role = "Student"
         self.UserID = input("User ID: ")
-
-        if(self.UserID not in self.StudentList.keys()):
+        while(self.UserID not in self.StudentList.keys()):
             print("The student ID doesn't exist")
-        else:
-            self.PhoneNo = self.StudentList[self.UserID]["PhoneNo"]
-            with open("Account.txt", "a") as file1:
-                file1.write(self.AccountID + ", " + self.UserName + ", " + self.Password + ", " + self.PhoneNo + ", " + self.Role + ", " + self.UserID + "\n")
+            self.UserID = input("User ID: ")
+        self.PhoneNo = self.StudentList[self.UserID]["PhoneNo"]
+        
+        with open("Account.txt", "a") as file1:
+            file1.write(self.AccountID + ", " + self.UserName + ", " + self.Password + ", " + self.PhoneNo + ", " + self.Role + ", " + self.UserID + "\n")
+        print("The student account has beeen created")
 
 accountList1 = Create_Account()
 while(1):
