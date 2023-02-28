@@ -47,35 +47,58 @@ class TeacherCourse:
         idex = 0
         for item in list1:
             TeacherID, CourseID = item.split(", ")
-            self.TeacherCourseList[idex] = {"Teacher_id":TeacherID, "Course_id":CourseID}
+            self.TeacherCourseList[str(idex)] = {"Teacher_id":TeacherID, "Course_id":CourseID}
             idex = idex + 1
+
+    #function to update the new data to the file
+    def update_data(self):
+        with open("TeacherCourse.txt", "w") as file1:
+            for key in self.TeacherCourseList:
+                file1.write(self.TeacherCourseList[key]["Teacher_id"] + ", " + self.TeacherCourseList[key]["Course_id"] + "\n")
+
+    #function to get all the existed teacher ID from the TeacherCourseList
+    def get_existedTeacherID(self):
+        self.existedTeacherID = []
+        for key in self.TeacherCourseList:
+            self.existedTeacherID.append(self.TeacherCourseList[key]["Teacher_id"])
+
+    #function to get all the existed course ID from the TeacherCourseList
+    def get_existedCourseID(self):
+        self.existedCourseID = []
+        for key in self.TeacherCourseList:
+            self.existedCourseID.append(self.TeacherCourseList[key]["Course_id"])
 
     #function to remove a course from a teacher
     def remove_a_course_from_a_teacher(self):
         self.get_teacherCourseList_as_dict()
-        CourseID = input("Course ID(to remove): ")
+        self.get_existedTeacherID()
+        self.get_existedCourseID()
 
-        if(CourseID not in self.CourseList):
+        CourseID = input("Course ID(to remove): ")
+        if(CourseID not in self.existedCourseID):
             print("The course ID doesn't exist")
         else:
             TeacherID = input("Teacher ID(of the course): ")
-            if(TeacherID not in self.TeacherList):
+            if(TeacherID not in self.existedTeacherID):
                 print("The teacher ID doesn't exist")
             else:
+                found = False
                 for key in self.TeacherCourseList:
                     if(TeacherID == self.TeacherCourseList[key]["Teacher_id"] and CourseID == self.TeacherCourseList[key]["Course_id"]):
                         del self.TeacherCourseList[key]
+                        found = True
+                        self.update_data()
+                        print("The course has been removed from the teacher")
                         break
-                print("The course has been removed from the teacher")
+                if not(found):
+                    print("There is no equivalent course id and teacher id combination ")
 
     #function to display all the courses taught by a teacher
     def display_all_courses_taught_by_a_teacher(self, teacher_id):
         self.get_teacherCourseList_as_dict()
-        existedTeacherID = []
-        for key in self.TeacherCourseList:
-            existedTeacherID.append(self.TeacherCourseList[key]["Teacher_id"])
+        self.get_existedTeacherID()
 
-        if(teacher_id not in existedTeacherID):
+        if(teacher_id not in self.existedTeacherID):
             print("The teacher ID doesn't exist")
         else:
             print("---------------------------------------")
