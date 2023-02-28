@@ -62,6 +62,7 @@ class Department:
             self.DepartmentList[id] = {"DepartmentName":self.DepartmentName, "HeadName":self.HeadName, "OfficeNo":self.OfficeNo, "FacultyID":self.FacultyID}
 
             self.update_data()
+            print("The department has been updated")
 
     #function to delete a department by id
     def delete_a_department(self, id):
@@ -75,6 +76,7 @@ class Department:
                     break
 
             self.update_data()
+            print("The department has been deleted")
 
     #function to display all the departments
     def display_all_department(self):
